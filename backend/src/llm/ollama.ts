@@ -1,13 +1,13 @@
 import { Ollama } from "ollama";
 import { randomUUID } from "node:crypto";
-import type { ChatMessage, LLMProvider, LLMResponse, ToolDef } from "../types.js";
+import type { ChatMessage, LLMProvider, LLMResponse, ToolDef } from "./types.js";
 
 export class OllamaProvider implements LLMProvider {
     private client: Ollama;
 
     constructor(
-        host = "http://localhost:11434",
-        private model = "qwen2.5:7b"
+        host = process.env.OLLAMA_URL ?? "http://localhost:11434",
+        private model = process.env.OLLAMA_MODEL ?? "qwen2.5:7b"
     ) {
         this.client = new Ollama({ host });
     }
