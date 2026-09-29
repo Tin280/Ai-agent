@@ -3,7 +3,7 @@ import { OllamaProvider } from "./llm/ollama";
 const llm = new OllamaProvider();
 
 const res = await llm.chat(
-    [{ role: "user", content: "Thời tiết ở Helsinki thế nào?" }],
+    [{ role: "user", content: "Thời tiết ở Ho Chi Minh thế nào?" }],
     [
         {
             name: "get_weather",
