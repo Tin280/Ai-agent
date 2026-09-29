@@ -1,5 +1,5 @@
 export async function runAgent(llm: LLMProvider, hub: McpHub, tools: ToolDef[], history: ChatMessage[]) {
-    for (let step = 0; step < 5; step++) {            // giới hạn để tránh lặp vô hạn
+    for (let step = 0; step < 5; step++) {            // limit the loop
         const res = await llm.chat(history, tools);
         history.push({ role: "assistant", content: res.text, toolCalls: res.toolCalls });
 
@@ -10,5 +10,5 @@ export async function runAgent(llm: LLMProvider, hub: McpHub, tools: ToolDef[], 
             history.push({ role: "tool", toolCallId: call.id, name: call.name, content: output });
         }
     }
-    return "Đã đạt giới hạn số bước.";
+    return "Reach the limit steps.";
 }
