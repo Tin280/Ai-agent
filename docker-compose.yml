@@ -1,0 +1,40 @@
+# services:
+#   backend:
+#     build: ./backend
+#     ports:
+#       - "4000:4000"
+#     environment:
+#       LLM_PROVIDER: ollama
+#       OLLAMA_URL: http://host.docker.internal:11434
+#       OLLAMA_MODEL: qwen2.5:7b
+#     extra_hosts:
+#       - "host.docker.internal:host-gateway" 
+
+#   frontend:
+#     build: ./frontend
+#     ports:
+#       - "3000:3000"
+#     environment:
+#       NEXT_PUBLIC_API_URL: http://localhost:4000
+#     depends_on: [ backend ]
+
+services:
+  ollama:
+    image: ollama/ollama
+    profiles: ["with-ollama"]
+    ports:
+      - "11434:11434"
+    volumes:
+      - ollama_data:/root/.ollama
+    # GPU NVIDIA (bỏ nếu chạy CPU):
+    # deploy:
+    #   resources:
+    #     reservations:
+    #       devices:
+    #         - capabilities: [gpu]
+
+volumes:
+  ollama_data:
+
+  # docker compose --profile with-ollama up -d
+# docker compose exec ollama ollama pull qwen2.5:7b
