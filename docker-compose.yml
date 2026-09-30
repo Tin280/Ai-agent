@@ -31,7 +31,9 @@ services:
     restart: "no"
 
   backend:
-    build: ./backend
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
     ports:
       - "4000:4000"
     depends_on:
@@ -42,7 +44,8 @@ services:
       OLLAMA_URL: http://ollama:11434
       OLLAMA_MODEL: ${OLLAMA_MODEL:-qwen2.5:7b}
     volumes:
-      - ./backend/src:/app/src
+      - ./backend/src:/app/backend/src
+      - ./mcp-weather/src:/app/mcp-weather/src
 
 volumes:
   ollama_data:

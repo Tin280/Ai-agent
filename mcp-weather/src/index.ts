@@ -17,11 +17,12 @@ server.registerTool(
     },
 
     async ({ city }) => {
+        console.error("get_weather called with:", JSON.stringify(city));
         const geo = await fetch(
             `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(city)}&count=1`
         ).then((r) => r.json());
 
-        const loc = geo.result?.[0];
+        const loc = geo.results?.[0];
         if (!loc) return { content: [{ type: "text", text: `Can't find the ${city}` }], isError: true };
 
         const w = await fetch(
