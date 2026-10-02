@@ -7,12 +7,16 @@ import { runAgent } from "./agent.js";
 import type { ChatMessage, ToolDef } from "./llm/types.js";
 
 // Danh sách MCP server. Thêm github / calendar vào đây sau này.
+// const MCP_SERVERS = [
+//     {
+//         name: "weather",
+//         command: "npx",
+//         args: ["tsx", process.env.MCP_WEATHER_PATH ?? "../mcp-weather/src/index.ts"],
+//     },
+// ];
 const MCP_SERVERS = [
-    {
-        name: "weather",
-        command: "npx",
-        args: ["tsx", process.env.MCP_WEATHER_PATH ?? "../mcp-weather/src/index.ts"],
-    },
+    { name: "weather", command: "npx", args: ["tsx", process.env.MCP_WEATHER_PATH ?? "../mcp-weather/src/index.ts"] },
+    { name: "calendar", command: "npx", args: ["tsx", process.env.MCP_CALENDAR_PATH ?? "../mcp-calendar/src/index.ts"] },
 ];
 
 const llm = createProvider();

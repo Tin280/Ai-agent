@@ -46,6 +46,8 @@ services:
     volumes:
       - ./backend/src:/app/backend/src
       - ./mcp-weather/src:/app/mcp-weather/src
+##new
+      - ./mcp-calendar/src:/app/mcp-calendar/src
 
 volumes:
   ollama_data:
