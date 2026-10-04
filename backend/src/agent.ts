@@ -1,6 +1,6 @@
 import type { ChatMessage, LLMProvider, ToolDef } from "./llm/types.js";
 import type { McpHub } from "./mcp-client.js";
-
+import { buildSystemPrompt } from "./system-prompt.js";
 const MAX_STEPS = 5;
 
 export async function runAgent(
@@ -10,7 +10,11 @@ export async function runAgent(
     history: ChatMessage[]
 ): Promise<string> {
     for (let step = 0; step < MAX_STEPS; step++) {
-        const res = await llm.chat(history, tools);
+        const res = await llm.chat(
+            [{ role: "system", content: buildSystemPrompt() }, ...history],
+            tools
+        );
+        console.log("LLM raw:", JSON.stringify({ text: res.text, toolCalls: res.toolCalls }));
         history.push({ role: "assistant", content: res.text, toolCalls: res.toolCalls });
 
         // Không gọi tool nữa -> đây là câu trả lời cuối
