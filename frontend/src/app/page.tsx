@@ -10,8 +10,9 @@ type Status = { online: boolean; provider?: string; tools: number };
 
 const SUGGESTIONS = [
   "What's the weather in Helsinki right now?",
-  "Is it windier in Turku or Hanoi today?",
-  "Should I bring a jacket in Tokyo?",
+  "Can you show me the news from hackernews today?",
+  "Any new commits or issues from my GitHub repositories today?",
+  "List the events for this week.",
 ];
 
 function ToolTrace({ tool }: { tool: ToolUse }) {
@@ -155,7 +156,7 @@ export default function Home() {
               send(input);
             }
           }}
-          placeholder="Ask about the weather in any city"
+          placeholder="Ask anything"
           aria-label="Message"
         />
         <button type="submit" disabled={loading || !input.trim()}>

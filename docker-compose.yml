@@ -49,6 +49,7 @@ services:
       - ./mcp-weather/src:/app/mcp-weather/src
       - ./mcp-calendar/src:/app/mcp-calendar/src
       - ./mcp-hackernews/src:/app/mcp-hackernews/src
+      - ./mcp-github/src:/app/mcp-github/src
 
 volumes:
   ollama_data:
