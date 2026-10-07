@@ -11,7 +11,7 @@ export interface ToolCall {
 }
 
 export type ChatMessage =
-    | { role: "user" | "assistant"; content: string; toolCalls?: ToolCall[] }
+    | { role: "user" | "assistant" | "system"; content: string; toolCalls?: ToolCall[] }
     | { role: "tool"; toolCallId: string; name: string; content: string };
 
 export interface LLMResponse {
