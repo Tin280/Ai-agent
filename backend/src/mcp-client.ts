@@ -10,8 +10,12 @@ export class McpHub {
     async connect(command: string, args: string[]): Promise<ToolDef[]> {
         const client = new Client({ name: "ai-assistant", version: "1.0.0" });
         await client.connect(
-            new StdioClientTransport({ command, args, stderr: "inherit" })
-        );
+            new StdioClientTransport({
+                command,
+                args,
+                env: process.env.TIMEZONE ? { TIMEZONE: process.env.TIMEZONE } : {},
+                stderr: "inherit",
+            }));
         this.clients.push(client);
 
         const { tools } = await client.listTools();
